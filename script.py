@@ -5,7 +5,7 @@ import random
 air_raid = vlc.MediaPlayer("air-raid-siren.ogg")
 test_over = vlc.MediaPlayer("the-test-is-over.mp3")
 min_time = 30 * 60
-max_time = 90 * 60
+max_time = 60 * 60
 sort_time = 5 * 60
 
 print "starting"
