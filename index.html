@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ball Pit Sorting</title>
+    <meta charset="utf-8">
+    <style>
+    @keyframes fade {
+      0%   {background-color: #E25041;}
+      17%  {background-color: #FBA026;}
+      33%  {background-color: #F7DA64;}
+      50% {background-color: #61BD6D;}
+      67% {background-color: #3D8EB9;}
+      83% {background-color: #9365B8;}
+      100% {background-color: #E25041;}
+    }
+
+    /* The element to apply the animation to */
+    #bg {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      animation-name: fade;
+      animation-timing-function: ease;
+      animation-iteration-count: infinite;
+      animation-duration: 10s;
+    }
+
+    #bg.sorting {
+      animation-name: fade;
+      animation-timing-function: steps(1, end);
+      animation-iteration-count: infinite;
+      animation-duration: 0.5s;
+    }
+    </style>
+  </head>
+
+  <body>
+    <audio id="siren" src="air-raid-siren.ogg">
+      <p>Your browser does not support the <code>audio</code> element.</p>
+    </audio>
+    <audio id="test-over" src="the-test-is-over.mp3">
+      <p>Your browser does not support the <code>audio</code> element.</p>
+    </audio>
+
+    <div id='bg'>
+    </div>
+
+    <script>
+      console.log('starting');
+      var siren = document.getElementById('siren');
+      var testOver = document.getElementById('test-over');
+      var bg = document.getElementById('bg');
+      var sortTime = 10000;//5 * 60 * 1000;
+      var minWaitTime = 10000//30 * 60 * 1000;
+      var maxWaitTime = 30000//60 * 60 * 1000;
+      var colors = ['', '', , , , ]
+
+      startSorting();
+
+      function startSorting() {
+        bg.setAttribute('class', 'sorting');
+        console.log('sorting for ' + sortTime / 1000 + ' seconds');
+
+        siren.play();
+        setTimeout(function() {
+          testOver.play();
+          bg.setAttribute('class', '');
+          waitTime = (Math.random() * (maxWaitTime - minWaitTime)) + minWaitTime;
+          console.log('waiting for ' + waitTime / 1000 + ' seconds');
+          setTimeout(function() {
+            startSorting();
+          }, waitTime);
+        }, sortTime);
+      }
+    </script>
+  </body>
+</html>
